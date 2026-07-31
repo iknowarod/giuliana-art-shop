@@ -159,6 +159,9 @@ main {
   margin-top: 20px;
 }
 .tile {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
   border-radius: 24px;
   padding: 26px 12px;
   color: white;
