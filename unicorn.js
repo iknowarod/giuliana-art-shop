@@ -19,8 +19,8 @@
         '<rect x="59" y="66" width="10" height="30" rx="5" fill="#efe0ff"/>' +
         '<rect x="35" y="90" width="10" height="7" rx="3" fill="#c9a8f5"/>' +
         '<rect x="59" y="90" width="10" height="7" rx="3" fill="#c9a8f5"/>' +
-        /* Body */
-        '<ellipse cx="52" cy="53" rx="34" ry="24" fill="#ffffff"/>' +
+        /* Body (slimmer) */
+        '<ellipse cx="52" cy="55" rx="32" ry="18" fill="#ffffff"/>' +
         /* Front legs + hooves */
         '<rect x="45" y="68" width="10" height="29" rx="5" fill="#ffffff"/>' +
         '<rect x="69" y="68" width="10" height="29" rx="5" fill="#ffffff"/>' +
