@@ -93,8 +93,8 @@
     // Ease toward the cursor — smaller = slower, gentler chase.
     var dx = targetX - uniX;
     var dy = targetY - uniY;
-    uniX += dx * 0.05;
-    uniY += dy * 0.05;
+    uniX += dx * 0.035;
+    uniY += dy * 0.035;
 
     // Keep the whole unicorn on screen, above and below.
     uniX = clamp(uniX, HALFW, window.innerWidth - HALFW);
