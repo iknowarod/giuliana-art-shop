@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Original full-size photo backups — the site uses the art-*.jpg copies.
+# (Kept locally, not published, to keep the repo small.)
+images/IMG_*.jpeg
+images/IMG_*.JPEG
+
+# Local dev-server logs / scratch
+*.log
+
+# Local editor / tooling config (contains machine-specific paths)
+.claude/

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Art Shop — Giuliana's Website</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <span>🖍️</span><span>🎨</span><span>✏️</span><span>🌈</span><span>🖌️</span>
+  </div>
+
+  <header class="title-banner">
+    <h1>My Art Shop 🎨</h1>
+    <p>Real art made by me, Giuliana, age 6! 💖</p>
+  </header>
+
+  <nav>
+    <a class="btn btn-home" href="index.html">🏠 Home</a>
+    <a class="btn btn-pink active" href="art.html">🎨 My Art</a>
+    <a class="btn btn-blue" href="favorites.html">⭐ My Favorite Things</a>
+    <a class="btn btn-purple" href="about.html">💜 About Me</a>
+  </nav>
+
+  <main>
+    <section class="card">
+      <h2>Pick Your Favorite! 🛍️</h2>
+      <p class="shop-note">Every picture is one of a kind — made with markers, crayons, and lots of love. Tap a button to see how to buy it!</p>
+
+      <div class="shop">
+        <div class="product">
+          <div class="frame">
+            <img src="images/art-1.jpg" alt="Sunshine Kitty drawing"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="placeholder" style="display:none;">🐱 Add photo:<br>images/art-1.jpg</div>
+          </div>
+          <h3>🐱 Sunshine Kitty</h3>
+          <div class="price">$10</div>
+          <button class="buy" data-title="Sunshine Kitty" data-price="$10">Buy Me! 🛍️</button>
+        </div>
+
+        <div class="product">
+          <div class="frame">
+            <img src="images/art-2.jpg" alt="Purple Pal drawing"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="placeholder" style="display:none;">💜 Add photo:<br>images/art-2.jpg</div>
+          </div>
+          <h3>💜 Purple Pal</h3>
+          <div class="price">$15</div>
+          <button class="buy" data-title="Purple Pal" data-price="$15">Buy Me! 🛍️</button>
+        </div>
+
+        <div class="product">
+          <div class="frame">
+            <img src="images/art-3.jpg" alt="Rainbow and Flowers drawing"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="placeholder" style="display:none;">🌈 Add photo:<br>images/art-3.jpg</div>
+          </div>
+          <h3>🌈 Rainbow &amp; Flowers</h3>
+          <div class="price">$5</div>
+          <button class="buy" data-title="Rainbow &amp; Flowers" data-price="$5">Buy Me! 🛍️</button>
+        </div>
+
+        <div class="product">
+          <div class="frame">
+            <img src="images/art-4.jpg" alt="Under the Sea drawing"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="placeholder" style="display:none;">🐠 Add photo:<br>images/art-4.jpg</div>
+          </div>
+          <h3>🐠 Under the Sea</h3>
+          <div class="price">$1</div>
+          <button class="buy" data-title="Under the Sea" data-price="$1">Buy Me! 🛍️</button>
+        </div>
+
+        <div class="product">
+          <div class="frame">
+            <img src="images/art-5.jpg" alt="Jungle Friends drawing"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="placeholder" style="display:none;">🦁 Add photo:<br>images/art-5.jpg</div>
+          </div>
+          <h3>🦁 Jungle Friends</h3>
+          <div class="price">$5</div>
+          <button class="buy" data-title="Jungle Friends" data-price="$5">Buy Me! 🛍️</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Made with lots of love 💖💙💜</footer>
+
+  <!-- Full-screen art viewer (tap a picture to zoom) -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-hint">Tap the picture to zoom • pinch or scroll to zoom more • drag to move</div>
+  </div>
+
+  <!-- How-to-Buy pop-up -->
+  <div class="modal-overlay" id="buyModal">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-x" id="modalX" aria-label="Close">✕</button>
+      <h3 id="modalTitle">Yay! 🎉</h3>
+      <p class="pick" id="modalPick"></p>
+      <ul class="how">
+        <li>💵 Pay with cash (paper money) or 📱 Apple Pay.</li>
+        <li>👨‍👩‍👧 Friends &amp; family already know Giuliana's number!</li>
+        <li>❓ Don't have it? Text her mom or dad and they'll share it.</li>
+        <li>💖 Send the Apple Pay and the art is all yours!</li>
+      </ul>
+      <button class="modal-close" id="modalClose">Got it! 👍</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var modal = document.getElementById("buyModal");
+      var pick = document.getElementById("modalPick");
+      function openModal(title, price) {
+        pick.innerHTML = 'You picked <b>"' + title + '"</b> for <b>' + price + '</b>!';
+        modal.classList.add("open");
+      }
+      function closeModal() { modal.classList.remove("open"); }
+
+      document.querySelectorAll(".buy").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          openModal(this.getAttribute("data-title"), this.getAttribute("data-price"));
+        });
+      });
+      document.getElementById("modalClose").addEventListener("click", closeModal);
+      document.getElementById("modalX").addEventListener("click", closeModal);
+      // Close when tapping the dark background or pressing Escape
+      modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+    })();
+  </script>
+
+  <script>
+    // ===== Tap-to-open, zoomable art viewer =====
+    (function () {
+      var lb = document.getElementById("lightbox");
+      var img = document.getElementById("lightboxImg");
+      var scale = 1, tx = 0, ty = 0;
+      var MIN = 1, MAX = 5;
+
+      function apply() {
+        img.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + scale + ")";
+        img.classList.toggle("zoomed", scale > 1);
+      }
+      function reset() { scale = 1; tx = 0; ty = 0; apply(); }
+      function open(src, alt) { img.src = src; img.alt = alt || ""; reset(); lb.classList.add("open"); }
+      function close() { lb.classList.remove("open"); img.src = ""; }
+
+      // Open when a picture is tapped
+      document.querySelectorAll(".product .frame").forEach(function (frame) {
+        frame.addEventListener("click", function () {
+          var pic = frame.querySelector("img");
+          if (pic && pic.getAttribute("src")) open(pic.currentSrc || pic.src, pic.alt);
+        });
+      });
+
+      document.getElementById("lightboxClose").addEventListener("click", close);
+      lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && lb.classList.contains("open")) close();
+      });
+
+      // Tap the picture to toggle zoom in / out
+      var moved = false;
+      img.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (moved) { moved = false; return; }
+        if (scale > 1) reset();
+        else { scale = 2.5; apply(); }
+      });
+
+      // Scroll wheel to zoom (desktop)
+      lb.addEventListener("wheel", function (e) {
+        if (!lb.classList.contains("open")) return;
+        e.preventDefault();
+        scale = Math.min(MAX, Math.max(MIN, scale + (e.deltaY < 0 ? 0.25 : -0.25)));
+        if (scale === 1) { tx = 0; ty = 0; }
+        apply();
+      }, { passive: false });
+
+      // Drag to move around when zoomed in
+      var dragging = false, sx = 0, sy = 0, stx = 0, sty = 0;
+      img.addEventListener("pointerdown", function (e) {
+        if (scale <= 1) return;
+        dragging = true; moved = false; sx = e.clientX; sy = e.clientY; stx = tx; sty = ty;
+        try { img.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      img.addEventListener("pointermove", function (e) {
+        if (!dragging) return;
+        tx = stx + (e.clientX - sx); ty = sty + (e.clientY - sy);
+        if (Math.abs(e.clientX - sx) > 3 || Math.abs(e.clientY - sy) > 3) moved = true;
+        apply();
+      });
+      img.addEventListener("pointerup", function () { dragging = false; });
+
+      // Pinch to zoom (touch screens)
+      var pinchStart = 0, startScale = 1;
+      lb.addEventListener("touchmove", function (e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          var dx = e.touches[0].clientX - e.touches[1].clientX;
+          var dy = e.touches[0].clientY - e.touches[1].clientY;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (pinchStart === 0) { pinchStart = dist; startScale = scale; }
+          scale = Math.min(MAX, Math.max(MIN, startScale * (dist / pinchStart)));
+          apply();
+        }
+      }, { passive: false });
+      lb.addEventListener("touchend", function (e) {
+        if (e.touches.length < 2) { pinchStart = 0; if (scale === 1) { tx = 0; ty = 0; apply(); } }
+      });
+    })();
+  </script>
+
+  <script src="unicorn.js"></script>
+</body>
+</html>

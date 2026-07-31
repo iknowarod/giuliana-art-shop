@@ -1,0 +1,473 @@
+/* ===== Giuliana's Website — fun & colorful! ===== */
+
+:root {
+  --pink: #ff5fa2;
+  --pink-soft: #ffd3e8;
+  --blue: #3fb4ff;
+  --blue-soft: #cdeeff;
+  --purple: #a35bff;
+  --purple-soft: #e7d6ff;
+  --sunshine: #ffd23f;
+  --ink: #4a2b6b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Unicorn-face wallpaper behind everything ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;            /* behind the floating emoji (-1) and all content */
+  pointer-events: none;
+  opacity: 0.28;
+  background-repeat: repeat;
+  background-size: 108px 108px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='108' height='108'><text x='30' y='42' font-size='40' text-anchor='middle'>🦄</text><text x='84' y='96' font-size='40' text-anchor='middle'>🦄</text></svg>");
+}
+
+body {
+  font-family: "Comic Sans MS", "Chalkboard SE", "Baloo", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  background: linear-gradient(135deg, #cdeeff, #7ec9ff, #4aa8ff);
+  background-attachment: fixed;
+  text-align: center;
+  padding-bottom: 60px;
+  overflow-x: hidden;
+}
+
+/* Floating fun shapes in the background */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.sky span {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0.55;
+  animation: float 9s ease-in-out infinite;
+}
+.sky span:nth-child(1) { top: 12%; left: 8%;  animation-delay: 0s; }
+.sky span:nth-child(2) { top: 30%; left: 82%; animation-delay: 1.2s; }
+.sky span:nth-child(3) { top: 62%; left: 14%; animation-delay: 2.1s; }
+.sky span:nth-child(4) { top: 78%; left: 74%; animation-delay: 0.6s; }
+.sky span:nth-child(5) { top: 46%; left: 45%; animation-delay: 1.7s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50%      { transform: translateY(-26px) rotate(8deg); }
+}
+
+/* ===== Big happy title ===== */
+.title-banner {
+  padding: 40px 20px 10px;
+}
+.title-banner h1 {
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  line-height: 1.05;
+  color: white;
+  text-shadow:
+     3px 3px 0 var(--pink),
+     6px 6px 0 var(--blue),
+     9px 9px 0 var(--purple);
+  animation: wiggle 3s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg); }
+}
+.title-banner p {
+  margin-top: 18px;
+  font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+  color: var(--purple);
+  font-weight: bold;
+}
+
+/* ===== Navigation buttons ===== */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  padding: 24px 16px 10px;
+}
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: bold;
+  color: white;
+  padding: 18px 30px;
+  border-radius: 40px;
+  border: 4px solid white;
+  box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn:hover  { transform: translateY(-4px) scale(1.05); box-shadow: 0 12px 0 rgba(0,0,0,0.15); }
+.btn:active { transform: translateY(4px);  box-shadow: 0 3px 0 rgba(0,0,0,0.15); }
+
+.btn-pink   { background: var(--pink); }
+.btn-blue   { background: var(--blue); }
+.btn-purple { background: var(--purple); }
+.btn-home   { background: var(--sunshine); color: var(--ink); }
+
+/* Highlight the page you're on */
+.btn.active {
+  outline: 5px dashed white;
+  outline-offset: 4px;
+}
+
+/* ===== Content cards ===== */
+main {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 18px;
+}
+.card {
+  background: white;
+  border-radius: 30px;
+  padding: 34px 28px;
+  margin: 24px auto;
+  box-shadow: 0 14px 30px rgba(163, 91, 255, 0.25);
+  border: 6px solid var(--purple-soft);
+}
+.card h2 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--pink);
+  margin-bottom: 16px;
+}
+.card p {
+  font-size: clamp(1.05rem, 3vw, 1.35rem);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+/* Emoji gallery grid (art & favorites) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.tile {
+  border-radius: 24px;
+  padding: 26px 12px;
+  color: white;
+  font-weight: bold;
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  box-shadow: 0 8px 0 rgba(0,0,0,0.12);
+  transition: transform 0.15s ease;
+}
+.tile:hover { transform: rotate(-3deg) scale(1.06); }
+.tile .emoji { display: block; font-size: 3.4rem; margin-bottom: 10px; }
+.tile:nth-child(3n+1) { background: var(--pink); }
+.tile:nth-child(3n+2) { background: var(--blue); }
+.tile:nth-child(3n+3) { background: var(--purple); }
+
+/* ===== Art Shop ===== */
+.shop {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 26px;
+  margin-top: 24px;
+}
+.product {
+  background: white;
+  border-radius: 26px;
+  padding: 16px;
+  border: 5px solid var(--purple-soft);
+  box-shadow: 0 12px 26px rgba(163, 91, 255, 0.22);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease;
+}
+.product:hover { transform: translateY(-6px); }
+.product .frame {
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--blue-soft);
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+  position: relative;
+}
+.product .frame::after {
+  content: "🔍 Tap to zoom";
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(74, 43, 107, 0.72);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 4px 9px;
+  border-radius: 20px;
+  pointer-events: none;
+}
+.product .frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.product .frame .placeholder {
+  color: var(--purple);
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px;
+  line-height: 1.4;
+}
+.product h3 {
+  font-size: 1.4rem;
+  color: var(--pink);
+  margin: 14px 6px 4px;
+}
+.product .price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--purple);
+  margin: 2px 6px 12px;
+}
+.product .buy {
+  margin-top: auto;
+  width: 100%;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: white;
+  background: var(--sunshine);
+  color: var(--ink);
+  padding: 14px 18px;
+  border-radius: 30px;
+  border: 3px solid white;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.product .buy:hover  { transform: translateY(-3px); box-shadow: 0 9px 0 rgba(0,0,0,0.15); background: var(--pink); color: white; }
+.product .buy:active { transform: translateY(3px);  box-shadow: 0 3px 0 rgba(0,0,0,0.15); }
+
+.shop-note {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+/* ===== How-to-Buy pop-up ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;               /* above the flying unicorn */
+  background: rgba(74, 43, 107, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: #fff;
+  border-radius: 30px;
+  max-width: 470px;
+  width: 100%;
+  padding: 32px 26px 28px;
+  text-align: center;
+  border: 7px solid var(--purple-soft);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.35);
+  position: relative;
+  animation: pop 0.2s ease;
+}
+@keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-box h3 { color: var(--pink); font-size: 2rem; margin-bottom: 8px; }
+.modal-box .pick {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--purple);
+  margin-bottom: 18px;
+}
+.modal-box .how {
+  list-style: none;
+  text-align: left;
+  max-width: 380px;
+  margin: 0 auto 22px;
+}
+.modal-box .how li {
+  background: var(--blue-soft);
+  border-radius: 16px;
+  padding: 13px 16px;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  line-height: 1.45;
+  font-weight: bold;
+  color: var(--ink);
+}
+.modal-box .how li:nth-child(even) { background: var(--pink-soft); }
+.modal-close {
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.2rem;
+  background: var(--sunshine);
+  color: var(--ink);
+  border: 3px solid #fff;
+  padding: 13px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
+}
+.modal-close:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15); }
+.modal-x {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--purple);
+  background: none;
+  border: none;
+  font-weight: bold;
+}
+
+/* ===== Full-screen art viewer (zoom) ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;               /* above everything else */
+  background: rgba(20, 10, 35, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: none;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 92vw;
+  max-height: 86vh;
+  border-radius: 14px;
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.7);
+  transform-origin: center center;
+  will-change: transform;
+  cursor: zoom-in;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+}
+.lightbox img.zoomed { cursor: grab; }
+.lightbox-close {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 3px solid #fff;
+  cursor: pointer;
+  z-index: 10002;
+}
+.lightbox-close:active { transform: scale(0.92); }
+.lightbox-hint {
+  position: fixed;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.05rem;
+  opacity: 0.85;
+  pointer-events: none;
+  padding: 0 16px;
+}
+
+/* Fun facts list for About Me */
+.facts {
+  list-style: none;
+  text-align: left;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.facts li {
+  background: var(--blue-soft);
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  font-size: clamp(1.05rem, 3vw, 1.3rem);
+  font-weight: bold;
+}
+.facts li:nth-child(even) { background: var(--pink-soft); }
+
+footer {
+  margin-top: 40px;
+  font-size: 1.1rem;
+  color: var(--purple);
+  font-weight: bold;
+}
+
+/* ===== Flying unicorn that chases the cursor ===== */
+#unicorn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;          /* always on top */
+  width: 120px;
+  height: 112px;
+  pointer-events: none;   /* never blocks clicks */
+  will-change: transform;
+  transform: translate(-200px, -200px);
+}
+/* .body wraps the whole unicorn and flips left/right to face travel */
+#unicorn .body {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 7px 6px rgba(163, 91, 255, 0.35));
+}
+#unicorn .uni-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+/* The wing flaps so the unicorn can fly! */
+#unicorn .wing-svg {
+  transform-box: fill-box;
+  transform-origin: 90% 68%;
+  animation: flapWing 0.34s ease-in-out infinite;
+}
+@keyframes flapWing {
+  0%, 100% { transform: rotate(-15deg); }
+  50%      { transform: rotate(27deg); }
+}
+
+/* Sprinkles falling down */
+.sprinkle {
+  position: fixed;
+  top: -20px;
+  z-index: 9998;
+  pointer-events: none;
+  border-radius: 6px;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #unicorn .wing-svg { animation: none; }
+}
